@@ -51,7 +51,7 @@ public class FXMLController {
 		}else {
 
 			model.creaGrafo(anno);
-			txtResult.appendText("Grafo creato con " + model.numVertici()+ " vertici e " +model.numArchi()+ " archi!\n");
+		//	txtResult.appendText("Grafo creato con " + model.numVertici()+ " vertici e " +model.numArchi()+ " archi!\n");
 
 			List<Country> vertici = model.getVertici();
 
@@ -69,7 +69,20 @@ public class FXMLController {
 
 	@FXML
 	void doStatiRaggiungibili(ActionEvent event) {
-
+		txtResult.clear();
+		
+		Country partenza = comboBox.getValue();
+		if(partenza == null) {
+			txtResult.appendText("Scegliere una nazione!");
+			return;
+		}
+		List<Country> statiRaggiungibili = model.statiRaggiungibili2(partenza);
+		
+	//	txtResult.appendText(String.format("%d\n", statiRaggiungibili.size()));
+		for(Country c: statiRaggiungibili) {
+			txtResult.appendText(c.toString()+"\n");
+			
+		}
 	}
 
 	@FXML // This method is called by the FXMLLoader when initialization is complete
